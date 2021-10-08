@@ -1,7 +1,8 @@
 #include "GameEngine.h"
 
 int main() {
-	GameDriver gameObj;
+	StateNode gameObj;
 	StateNode* currentNode = gameObj.initiliazeStates();
 	gameObj.playGame(currentNode);
+	//gameObj.deleteStates(currentNode);
 }
