@@ -1,6 +1,8 @@
 #include "GameEngine.h"
 #include <iostream>
 
+//----------------StateNodeClassImplementation----------------------------//
+
 void StateNode::setName(string stateName) {
 	//Set this node name to passed name value
 	this->name = stateName; 
@@ -33,9 +35,10 @@ StateNode* StateNode::getNextState2() {
 
 //default constructor, set all data values to null
 StateNode::StateNode() { 
-	this->name = nullptr;
-	this->nextState1 = nullptr;
-	this->nextState2 = nullptr;
+	//this->name = nullptr;
+	//this->nextState1 = nullptr;
+	//this->nextState2 = nullptr;
+	//ERROR**
 }
 
 //constructor with 1 next state node
@@ -45,21 +48,37 @@ StateNode::StateNode(string stateName, StateNode* nextState) {
 	this->nextState2 = nullptr;
 }
 
-//constructor with both primary and secondary state nodes
-StateNode::StateNode(string stateName, StateNode* nextStateNode1, StateNode* nextStateNode2) {
-	this->name = stateName;
-	this->nextState1 = nextStateNode1;
-	this->nextState2 = nextStateNode2;
+//copy constructor
+StateNode::StateNode(const StateNode& copy) {
+	name = *new string (copy.name);
+	nextState1 = new StateNode(*(copy.nextState1));
+	nextState2 = new StateNode(*(copy.nextState2));
 }
 
-//copy constructor
-//StateNode::StateNode(const StateNode &copy) {
-	//this->name = new string *(copy.name);
-	//this->nextState1 = new StateNode(*(copy.nextState1));
-	//this->nextState2 = new StateNode(*(copy.nextState2));
-//}
+//destructor
+StateNode::~StateNode() {
+	//delete(nextState1);
+	//delete(nextState2);
+	//ERROR**
+}
 
-StateNode* GameDriver::initiliazeStates() {
+//stream operator
+std::ostream & operator<<(std::ostream & out, const StateNode & state)
+{
+	return out << "State: " << state.name;
+}
+
+//assignment operator
+StateNode & StateNode::operator=(const StateNode &rightSide)
+{
+	name = rightSide.name;
+	nextState1 = rightSide.nextState1;
+	nextState2 = rightSide.nextState2;
+	return *this;
+}
+
+//methods
+StateNode* StateNode::initiliazeStates() {
 	StateNode* currentState = nullptr;
 
 	//Initiliaze states with their primary next state
@@ -79,14 +98,13 @@ StateNode* GameDriver::initiliazeStates() {
 	//Return pointer to start state
 	currentState = start;
 	return currentState;
+	
+	//NO DELETION = MEMORY LEAK?
 }
 
-void GameDriver::deleteStates() {
-	 
-}
-
-void GameDriver::playGame(StateNode* startNode) {
-	StateNode* temp = startNode;
+//method responsible for collecting user commands
+void StateNode::playGame(StateNode* startNode) {
+	StateNode* temp = startNode; //initiliaze start node
 	
 	cout << "STATE: start" << endl;
 
@@ -96,14 +114,16 @@ void GameDriver::playGame(StateNode* startNode) {
 		cin >> input;
 		temp = transition(input, temp);
 	} while (temp != nullptr);
+	//Continue commands until game is done
 
 }
 
-StateNode* GameDriver::transition(string command, StateNode* currentState) {
-	if (currentState->getName() == "start") {
-		if (command == "loadmap") {
+//method responsible for verifying transition commands
+StateNode* StateNode::transition(string command, StateNode* currentState) {
+	if (currentState->getName() == "start") { //check name of current statenode
+		if (command == "loadmap") { //determine valid commands for states
 			cout << "STATE: mapLoaded" << endl;
-			return currentState->getNextState1();
+			return currentState->getNextState1(); //return pointer to next state node
 		}
 		else {
 			cout << "Command not recognized." << endl;
@@ -212,4 +232,8 @@ StateNode* GameDriver::transition(string command, StateNode* currentState) {
 			return currentState;
 		}
 	}
+}
+
+void StateNode::deleteStates(StateNode* currentState) {
+
 }
