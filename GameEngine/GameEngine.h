@@ -8,7 +8,6 @@ public:
 	StateNode(); //default constructor
 	StateNode(string, StateNode*);
 	StateNode(const StateNode&); //copy constructor
-	~StateNode(); //destructor
 	//Getter methods
 	string getName();
 	StateNode* getNextState1();
