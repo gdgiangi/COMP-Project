@@ -3,22 +3,11 @@
 #include <string>
 using namespace std;
 
-class Hand {
-
-};
-class OrdersList {
-	void move(Order* order) {
-
-	}
-};
-class Order {
-
-};
 
 // Constructor
 Player::Player()
 {
-	this->name = new string{"Unknown"};
+	this->name = new string{ "Unknown" };
 	this->territoriesCollection = new vector<Territory*>();
 	this->hand = new Hand();
 	this->ordersList = new OrdersList();
@@ -75,7 +64,7 @@ ostream& operator<<(ostream& out, const Player& player)
 {
 	out << "Player: " << *player.name << endl;
 	out << "Territories Collection: " << endl;
-	for (int i = 0; i < player.territoriesCollection->size(); i ++) {
+	for (int i = 0; i < player.territoriesCollection->size(); i++) {
 		//out << *player.territoriesCollection[i].getName() << endl;
 	}
 	out << "Hand: " << player.hand << endl;
@@ -91,15 +80,15 @@ vector<Territory*>* Player::toDefend()
 	return getTerritoriesCollection();
 }
 
- 
+
 vector<Territory*>* Player::toAttack()
 {
-	
+
 	return getTerritoriesCollection();
 }
 
 
-void Player::issueOrder(Order* order)
+void Player::issueOrder(Orders* order)
 {
 	//ordersList->move(order);
 }
@@ -140,7 +129,6 @@ void Player::setOrdersList(OrdersList* newOrdersList)
 {
 	ordersList = newOrdersList;
 }
-
 
 
 
