@@ -35,10 +35,7 @@ StateNode* StateNode::getNextState2() {
 
 //default constructor, set all data values to null
 StateNode::StateNode() { 
-	//this->name = nullptr;
-	//this->nextState1 = nullptr;
-	//this->nextState2 = nullptr;
-	//ERROR**
+
 }
 
 //constructor with 1 next state node
@@ -53,13 +50,6 @@ StateNode::StateNode(const StateNode& copy) {
 	name = *new string (copy.name);
 	nextState1 = new StateNode(*(copy.nextState1));
 	nextState2 = new StateNode(*(copy.nextState2));
-}
-
-//destructor
-StateNode::~StateNode() {
-	//delete(nextState1);
-	//delete(nextState2);
-	//ERROR**
 }
 
 //stream operator
@@ -232,8 +222,4 @@ StateNode* StateNode::transition(string command, StateNode* currentState) {
 			return currentState;
 		}
 	}
-}
-
-void StateNode::deleteStates(StateNode* currentState) {
-
 }
