@@ -4,19 +4,14 @@
 #include <iostream>
 #include "Map.h"
 #include "Cards.h"
-#include "OrdersList.h"
+#include "Orders.h"
 using namespace std;
-
-class Territory;
-class Hand;
-class OrdersList;
-class Order;
 
 
 class Player
 {
 	string* name;
-	vector<Territory*>* territoriesCollection;		
+	vector<Territory*>* territoriesCollection;
 	Hand* hand;
 	OrdersList* ordersList;
 
@@ -35,7 +30,7 @@ public:
 	friend ostream& operator<< (ostream&, const Player&);		// Stream Extraction Operator
 	vector<Territory*>* toDefend();			// Returns the list of territores player can defend
 	vector<Territory*>* toAttack();			// Returns the list of territories player can attack
-	void issueOrder(Order* newOrder);						//	Creates an order and adds it the list
+	void issueOrder(Orders* newOrder);						//	Creates an order and adds it the list
 
 	// Getters
 	string getName();
@@ -50,7 +45,7 @@ public:
 	void setHand(Hand* hand);
 	void setOrdersList(OrdersList* ordersList);
 
-	
+
 
 
 };
