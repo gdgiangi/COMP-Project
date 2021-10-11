@@ -17,7 +17,6 @@ class Card {
 		Card& operator = (const Card& c); // assignment operators
 
 		// stream insertion operator
-		friend std::istream& operator>>(std::istream& in, const Card& card);
 		friend std::ostream& operator<<(std::ostream& out, const Card& card);
 
 		void printCardType(); // print card type
@@ -41,7 +40,6 @@ class Deck : public Card {
 		Deck& operator=(const Deck& d);	//assignment operators
 
 		// stream insertion operator
-		friend std::istream& operator>>(std::istream& in, const Deck& deck);
 		friend std::ostream& operator<<(std::ostream& out, const Deck& deck);
 
 		void deckStart(); // creates the deck
@@ -68,7 +66,6 @@ class Hand : public Deck {
 		Hand& operator=(const Hand& hand);	//assignment operators
 
 		// stream insertion operator
-		friend std::istream& operator>>(std::istream& in, const Hand& hand);
 		friend std::ostream& operator<<(std::ostream& out, const Hand& hand);
 
 		void setHandCards(Card* card); // pointer to set hand cards
