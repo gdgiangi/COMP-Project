@@ -4,5 +4,4 @@ int main() {
 	StateNode gameObj;
 	StateNode* currentNode = gameObj.initiliazeStates();
 	gameObj.playGame(currentNode);
-	//gameObj.deleteStates(currentNode);
 }
