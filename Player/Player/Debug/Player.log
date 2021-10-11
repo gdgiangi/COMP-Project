@@ -1,0 +1,4 @@
+﻿  Player.cpp
+C:\Users\Piyush\source\repos\Player\Player\Player.cpp(51,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Piyush\source\repos\Player\Player\Player.cpp(78,20): warning C4018: '<': signed/unsigned mismatch
+  Player.vcxproj -> C:\Users\Piyush\source\repos\Player\Debug\Player.exe
