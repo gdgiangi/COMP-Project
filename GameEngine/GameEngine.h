@@ -2,10 +2,10 @@
 #include <string>
 using namespace std;
 
-struct StateNode{
+struct StateNode {
 public:
 	//Constuctors
-	StateNode(); //default constructor
+	StateNode();
 	StateNode(string, StateNode*);
 	StateNode(const StateNode&); //copy constructor
 	//Getter methods
