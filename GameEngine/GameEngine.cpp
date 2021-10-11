@@ -5,41 +5,40 @@
 
 void StateNode::setName(string stateName) {
 	//Set this node name to passed name value
-	this->name = stateName; 
+	this->name = stateName;
 }
 
 string StateNode::getName() {
 	//return value of node name
-	return this->name; 
+	return this->name;
 }
 
 void StateNode::setNextState1(StateNode* nextState) {
 	//set pointer of primary next state node 
-	this->nextState1 = nextState; 
+	this->nextState1 = nextState;
 }
 
 void StateNode::setNextState2(StateNode* nextState) {
 	//set pointer of secondary next state node 
-	this->nextState2 = nextState; 
+	this->nextState2 = nextState;
 }
 
 StateNode* StateNode::getNextState1() {
 	//return pointer to primary next state
-	return this->nextState1; 
+	return this->nextState1;
 }
 
 StateNode* StateNode::getNextState2() {
 	//return pointer to secondary next state
-	return this->nextState2; 
+	return this->nextState2;
 }
 
-//default constructor, set all data values to null
-StateNode::StateNode() { 
-
+StateNode::StateNode(){
+	
 }
 
 //constructor with 1 next state node
-StateNode::StateNode(string stateName, StateNode* nextState) { 
+StateNode::StateNode(string stateName, StateNode* nextState) {
 	this->name = stateName;
 	this->nextState1 = nextState;
 	this->nextState2 = nullptr;
@@ -47,19 +46,19 @@ StateNode::StateNode(string stateName, StateNode* nextState) {
 
 //copy constructor
 StateNode::StateNode(const StateNode& copy) {
-	name = *new string (copy.name);
+	name = *new string(copy.name);
 	nextState1 = new StateNode(*(copy.nextState1));
 	nextState2 = new StateNode(*(copy.nextState2));
 }
 
 //stream operator
-std::ostream & operator<<(std::ostream & out, const StateNode & state)
+std::ostream& operator<<(std::ostream& out, const StateNode& state)
 {
 	return out << "State: " << state.name;
 }
 
 //assignment operator
-StateNode & StateNode::operator=(const StateNode &rightSide)
+StateNode& StateNode::operator=(const StateNode& rightSide)
 {
 	name = rightSide.name;
 	nextState1 = rightSide.nextState1;
@@ -88,14 +87,13 @@ StateNode* StateNode::initiliazeStates() {
 	//Return pointer to start state
 	currentState = start;
 	return currentState;
-	
-	//NO DELETION = MEMORY LEAK?
+
 }
 
 //method responsible for collecting user commands
 void StateNode::playGame(StateNode* startNode) {
 	StateNode* temp = startNode; //initiliaze start node
-	
+
 	cout << "STATE: start" << endl;
 
 	string input;
@@ -121,7 +119,7 @@ StateNode* StateNode::transition(string command, StateNode* currentState) {
 			return currentState;
 		}
 	}
-	else if(currentState->getName() == "mapLoaded") {
+	else if (currentState->getName() == "mapLoaded") {
 		if (command == "validatemap") {
 			cout << "STATE: mapValidated" << endl;
 			return currentState->getNextState1();
